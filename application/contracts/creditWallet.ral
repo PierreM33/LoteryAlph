@@ -1,0 +1,34 @@
+Contract CreditWallet() {
+
+    // Mapping pour stocker les balances des utilisateurs
+    mapping [Address, U256] balances
+  
+    enum ErrorCodes {
+        InsufficientAmount = 0
+      }
+      
+    // Fonction pour créditer le portefeuille de test avec des fonds
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn creditWallet(recipient: Address, amount: U256) -> () {
+      // Vérifie que le montant à créditer est supérieur à zéro
+      assert!(amount > 0, ErrorCodes.InsufficientAmount)
+  
+      // Crédite le portefeuille de test avec le montant spécifié
+      if (balances.contains!(recipient)) {
+        balances[recipient] = balances[recipient] + amount
+      } else {
+        balances.insert!(recipient, recipient, amount)
+      }
+    }
+  
+    // Fonction pour récupérer la balance d'un utilisateur
+    pub fn getBalance(address: Address) -> U256 {
+      // Récupère la balance de l'utilisateur
+      if (balances.contains!(address)) {
+        return balances[address]
+      } else {
+        return 0
+      }
+    }
+  }
+  

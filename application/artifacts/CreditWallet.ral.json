@@ -1,0 +1,68 @@
+{
+  "version": "v3.6.2",
+  "name": "CreditWallet",
+  "bytecode": "0002407140ab0103020200402cd35c3c7a7a16010c330c7b140a5f5f6d61705f5f305f5f16004744cbc54c150c0d0d140a5f5f6d61705f5f305f5f16004744cb010116012a0c0e0c140a5f5f6d61705f5f305f5f16004744cb01024a0a1600d1a2140a5f5f6d61705f5f305f5f16004744b11601d20101010001010115d3ab5ac590140a5f5f6d61705f5f305f5f16004744cbc54c0b0c0d0d140a5f5f6d61705f5f305f5f16004744cb0101024a020c02",
+  "codeHash": "4e31700c5a3eec94ab953ba3d20ea6faa441368aa51c38f06805b504de482003",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "creditWallet",
+      "paramNames": [
+        "recipient",
+        "amount"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "getBalance",
+      "paramNames": [
+        "address"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "InsufficientAmount",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "mapsSig": {
+    "names": [
+      "balances"
+    ],
+    "types": [
+      "Map[Address,U256]"
+    ]
+  }
+}

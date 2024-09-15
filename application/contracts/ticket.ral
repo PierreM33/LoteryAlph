@@ -1,0 +1,41 @@
+Contract Ticket() {
+
+    mapping [Address, Bool] ticket
+
+    event Ticket(address: Address, success: Bool)
+
+ 
+
+    @using(preapprovedAssets = true, checkExternalCaller = false, assetsInContract = true)
+    @using(asset = true)
+    pub fn buyTicket(address: Address, amount: U256) -> Bool {
+        // Déclaration de la variable alphTokenId
+        let alphTokenId = selfTokenId!()
+        
+        // Vérifier si l'utilisateur a déjà acheté un ticket
+        if (ticket.contains!(address)) {
+            // Si oui, renvoyer un code d'erreur
+            emit Ticket(address, false)
+            return false
+        }
+
+        // Approuve l'utilisation de la balance de l'utilisateur
+        approveToken!(address, alphTokenId, amount)
+        
+        // Transfère la balance de l'utilisateur vers le contrat
+        //transferToken!(address, selfAddress, alphTokenId, amount)
+        transferTokenToSelf!(address, alphTokenId, amount)
+
+        // Débiter le compte de l'utilisateur
+        //transferTokenFromSelf!(address, alphTokenId, amount)
+
+        // Mettre à jour le mapping pour indiquer que l'utilisateur a acheté un ticket
+        ticket.insert!(address, address, true)
+
+        // Émettre l'événement pour signaler l'achat du ticket
+        emit Ticket(address, true)
+
+        // Renvoyer true pour indiquer que l'achat a réussi
+        return true
+    }
+}

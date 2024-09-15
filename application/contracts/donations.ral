@@ -1,0 +1,54 @@
+Contract Donations() {
+    
+    // Déclare un mapping (table de hachage) entre une adresse et un montant (U256)
+    // Utilisé pour suivre le montant donné par chaque donateur
+    mapping [Address, U256] donors
+
+    // Événement "Donation" qui sera déclenché à chaque fois qu'un don est effectué
+    event Donation(donor: Address, recipient: Address, amount: U256)
+
+    // Enumération pour gérer les différents types d'erreurs
+    // Ici, nous avons une seule erreur : "InsufficientAmount" si le montant est inférieur ou égal à zéro
+    enum ErrorCodes {
+        InsufficientAmount = 0
+    }
+
+    // Fonction publique "depositTouser" pour permettre à un utilisateur de faire un don
+    // L'annotation @using permet de contrôler l'utilisation des actifs et les appels externes
+    // "preapprovedAssets = true" permet l'utilisation d'actifs pré-approuvés
+    // "checkExternalCaller = false" désactive la vérification des appels externes
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn depositTouser(recipient: Address, amount: U256 ) -> () {
+        
+        // Vérifie que le montant du don est supérieur à zéro
+        assert!(amount > 0, ErrorCodes.InsufficientAmount)
+        
+        // Récupère l'adresse de l'appelant (le donateur)
+        let caller = callerAddress!()
+    
+        // Si le bénéficiaire (recipient) a déjà reçu un don, ajoute le nouveau montant à celui existant
+        if (donors.contains!(recipient)) {
+            donors[recipient] = donors[recipient] + amount
+        } 
+        // Sinon, insère une nouvelle entrée dans le mapping pour ce donateur
+        else {
+            donors.insert!(caller, recipient, amount)
+        }
+
+        // Déclenche l'événement "Donation" pour enregistrer le don
+        emit Donation(caller, recipient, amount)
+    }
+
+    // Fonction publique pour récupérer le total des dons d'un donateur spécifique
+    pub fn getDonorTotal(donor: Address) -> U256 {
+        // Si le donateur a déjà fait un don, retourne le montant total de ses dons
+        if (donors.contains!(donor)) {
+            return donors[donor]
+        } 
+        // Si le donateur n'a rien donné, retourne 0
+        else {
+            return 0
+        }
+    }
+
+}

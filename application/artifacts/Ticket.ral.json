@@ -1,0 +1,54 @@
+{
+  "version": "v3.6.2",
+  "name": "Ticket",
+  "bytecode": "0001405801010203014028d3ca3453d6b11702140a5f5f6d61705f5f305f5f16004744cbc54c06051600045f0402160016021601a3160016021601ac1600d1a2140a5f5f6d61705f5f305f5f16004744b103d20101051600035f0302",
+  "codeHash": "fb49f94cba1c0559e0853b4626e1e7822042da77e5529248d66e635dad719e7e",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [
+    {
+      "name": "Ticket",
+      "fieldNames": [
+        "address",
+        "success"
+      ],
+      "fieldTypes": [
+        "Address",
+        "Bool"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "buyTicket",
+      "paramNames": [
+        "address",
+        "amount"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": [
+        "Bool"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": [],
+  "mapsSig": {
+    "names": [
+      "ticket"
+    ],
+    "types": [
+      "Map[Address,Bool]"
+    ]
+  }
+}
