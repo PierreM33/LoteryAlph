@@ -49,7 +49,7 @@ const deployContract: DeployFunction<Settings> = async (
   // Transaction pour effectuer un don à l'adresse récupérée
   await contract.transact.depositTouser({
     signer, // Le signataire est le portefeuille de test
-    args: { recipient: address.address, amount }, // Don à l'adresse actuelle avec le montant défini
+    args: {recipient: address.address, amount}, // Don à l'adresse actuelle avec le montant défini
     attoAlphAmount: ONE_ALPH * amount // Spécification du montant en attoALPH (plus petite unité d'ALPH)
   });
 

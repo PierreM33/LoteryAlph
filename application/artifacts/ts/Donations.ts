@@ -3,34 +3,34 @@
 /* eslint-disable */
 
 import {
-  Address,
-  Contract,
-  ContractState,
-  TestContractResult,
-  HexString,
-  ContractFactory,
-  EventSubscribeOptions,
-  EventSubscription,
-  CallContractParams,
-  CallContractResult,
-  TestContractParams,
-  ContractEvent,
-  subscribeContractEvent,
-  subscribeContractEvents,
-  testMethod,
-  callMethod,
-  multicallMethods,
-  fetchContractState,
-  Asset,
-  ContractInstance,
-  getContractEventsCurrentCount,
-  TestContractParamsWithoutMaps,
-  TestContractResultWithoutMaps,
-  SignExecuteContractMethodParams,
-  SignExecuteScriptTxResult,
-  signExecuteMethod,
-  addStdIdToFields,
-  encodeContractFields,
+    Address,
+    Contract,
+    ContractState,
+    TestContractResult,
+    HexString,
+    ContractFactory,
+    EventSubscribeOptions,
+    EventSubscription,
+    CallContractParams,
+    CallContractResult,
+    TestContractParams,
+    ContractEvent,
+    subscribeContractEvent,
+    subscribeContractEvents,
+    testMethod,
+    callMethod,
+    multicallMethods,
+    fetchContractState,
+    Asset,
+    ContractInstance,
+    getContractEventsCurrentCount,
+    TestContractParamsWithoutMaps,
+    TestContractResultWithoutMaps,
+    SignExecuteContractMethodParams,
+    SignExecuteScriptTxResult,
+    signExecuteMethod,
+    addStdIdToFields,
+    encodeContractFields, SignerProvider,
 } from "@alephium/web3";
 import { default as DonationsContractJson } from "../Donations.ral.json";
 import { getContractByCodeHash } from "./contracts";
@@ -210,7 +210,7 @@ export class DonationsInstance extends ContractInstance {
 
   transact = {
     depositTouser: async (
-      params: DonationsTypes.SignExecuteMethodParams<"depositTouser">
+        params: { args: { amount: bigint; recipient: string }; attoAlphAmount: bigint; signer: SignerProvider | undefined }
     ): Promise<DonationsTypes.SignExecuteMethodResult<"depositTouser">> => {
       return signExecuteMethod(Donations, this, "depositTouser", params);
     },

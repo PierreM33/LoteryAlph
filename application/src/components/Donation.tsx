@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useWallet } from '@alephium/web3-react'
-import { Donations } from '../../artifacts/ts'
+import { Donations } from '@/artifacts/ts'
 
 const Donation = () => {
     const { signer } = useWallet()

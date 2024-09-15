@@ -2,6 +2,7 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import { AlephiumWalletProvider } from '@alephium/web3-react'
 import { tokenFaucetConfig } from './../services/utils'
+import "./../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
